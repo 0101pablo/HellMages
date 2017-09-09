@@ -15,6 +15,10 @@ public class Player : MonoBehaviour {
     bool directionBarSwitch = false;
     bool resetAux =false;
 
+    public GameObject saidaProjetil;
+
+    public GameObject projetilAPrefab;
+
 	// Use this for initialization
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
@@ -22,7 +26,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Movimentacao();
+        if (!barrasIniciadas) Movimentacao();
         Barras();
 	}
 
@@ -65,7 +69,7 @@ public class Player : MonoBehaviour {
             directionBar.transform.rotation = Quaternion.Euler(rotacao);
             if (Input.GetKeyDown(KeyCode.Space)){
                 directionBarSwitch = false;
-                //INSERIR FUNCAO DE TIRO AQUI! algo do tipo Disparo();    <------
+                Tiro();
                 barrasIniciadas = false;
                 ResetBarras();
             }        
@@ -85,5 +89,12 @@ public class Player : MonoBehaviour {
         rotacao.z = 0f;
         directionBar.transform.rotation = Quaternion.Euler(rotacao);
         resetAux = true;
+    }
+
+    void Tiro(){
+        GameObject projetilAClone = Instantiate(projetilAPrefab) as GameObject;
+        projetilAClone.transform.position = saidaProjetil.transform.position;
+        Rigidbody2D rbProjA = projetilAClone.GetComponent<Rigidbody2D>();
+        //?????
     }
 }

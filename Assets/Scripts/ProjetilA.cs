@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projetil1 : MonoBehaviour {
+public class ProjetilA : MonoBehaviour {
 
     int toque = 0;
 
@@ -16,13 +16,8 @@ public class Projetil1 : MonoBehaviour {
 		
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (toque >= 4)
-        {
-            Destroy(gameObject);
-        }
+    private void OnCollisionEnter2D(Collision2D collision){
+        if (toque >= 4) Destroy(gameObject);
         else toque++;
     }
-
 }
