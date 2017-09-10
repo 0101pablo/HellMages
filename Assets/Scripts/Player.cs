@@ -85,7 +85,7 @@ public class Player : MonoBehaviour {
             directionBar.transform.rotation = Quaternion.Euler(rotacao);
             if (Input.GetKeyDown(KeyCode.Space)){
                 directionBarSwitch = false;
-                Tiro();
+                Tiro(powerBar.value, rotacao);
                 barrasIniciadas = false;
                 ResetBarras();
             }        
@@ -100,11 +100,13 @@ public class Player : MonoBehaviour {
         resetAux = true;
     }
 
-    void Tiro(){
-        GameObject projetilAClone = Instantiate(projetilAPrefab) as GameObject;
-        projetilAClone.transform.position = saidaProjetil.transform.position;
+    void Tiro(float powerBarValue, Vector3 rotacao){
+        GameObject projetilAClone = Instantiate(projetilAPrefab, saidaProjetil.transform.position,Quaternion.Euler(rotacao)) as GameObject;
         Rigidbody2D rbProjA = projetilAClone.GetComponent<Rigidbody2D>();
-        //?????
+        rbProjA.transform.rotation = Quaternion.Euler(rotacao);
+
+        //Estudar como arremessar no ângulo certo
+        rbProjA.AddForce(transform.right * powerBarValue * 1000); //a força está OK, porém não está obedecendo o ângulo. Estudar
 
         TrocaPlayers();
     }
