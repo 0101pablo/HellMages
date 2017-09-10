@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
+    public GameObject player1;
+    public GameObject player2;
+
     Rigidbody2D rb2d = new Rigidbody2D();
 
     bool barrasIniciadas = false;
@@ -22,12 +25,18 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
+
+        //condições especiais no início do jogo:
+        PlayerPrefs.SetString("playerTurn", player1.name);
+        if (gameObject.name == player2.name) resetAux = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (!barrasIniciadas) Movimentacao();
-        Barras();
+        if(gameObject.name == PlayerPrefs.GetString("playerTurn")){
+            if (!barrasIniciadas) Movimentacao();
+            Barras();
+        }
 	}
 
     void Movimentacao(){
@@ -38,6 +47,13 @@ public class Player : MonoBehaviour {
         if (Input.GetKey(KeyCode.LeftArrow)){
             transform.Translate(Vector2.right * 1f * Time.deltaTime);
             transform.eulerAngles = new Vector2(0, 180);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision){
+        if (Input.GetKeyDown(KeyCode.UpArrow) && gameObject.name == PlayerPrefs.GetString("playerTurn")){
+            //transform.Translate(Vector2.up * 100f * Time.deltaTime);
+            rb2d.AddForce(transform.up * 200);
         }
     }
 
@@ -76,13 +92,6 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision){
-        if (Input.GetKeyDown(KeyCode.UpArrow)){
-            //transform.Translate(Vector2.up * 100f * Time.deltaTime);
-            rb2d.AddForce(transform.up * 200);
-        }
-    }
-
     void ResetBarras(){
         powerBar.value = 0;
         var rotacao = directionBar.transform.rotation.eulerAngles;
@@ -96,5 +105,12 @@ public class Player : MonoBehaviour {
         projetilAClone.transform.position = saidaProjetil.transform.position;
         Rigidbody2D rbProjA = projetilAClone.GetComponent<Rigidbody2D>();
         //?????
+
+        TrocaPlayers();
+    }
+
+    void TrocaPlayers(){
+        if (PlayerPrefs.GetString("playerTurn") == player1.name) PlayerPrefs.SetString("playerTurn", player2.name);
+        else if (PlayerPrefs.GetString("playerTurn") == player2.name) PlayerPrefs.SetString("playerTurn", player1.name);
     }
 }

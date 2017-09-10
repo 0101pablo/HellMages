@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: da419fba8465e6b43aee4c422c718b46
-timeCreated: 1504822290
+timeCreated: 1505057176
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - powerBar: {instanceID: 0}
+  - directionBar: {instanceID: 0}
+  - saidaProjetil: {instanceID: 0}
+  - projetilAPrefab: {fileID: 1027226230942942, guid: c99ef69423c48cf4c8887099fb9db8f6,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
