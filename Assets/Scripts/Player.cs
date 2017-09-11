@@ -79,13 +79,13 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.Space) && barrasIniciadas && !powerBarSwitch) directionBarSwitch = true;
         if (directionBarSwitch){
             if (rotacao.z <= 10f) barMove = true;
-            if (rotacao.z >= 90f) barMove = false;
+            if (rotacao.z >= 170f) barMove = false;
             if (barMove) rotacao.z = rotacao.z + 2f;
             else if (!barMove) rotacao.z = rotacao.z - 2f;
             directionBar.transform.rotation = Quaternion.Euler(rotacao);
             if (Input.GetKeyDown(KeyCode.Space)){
                 directionBarSwitch = false;
-                Tiro(powerBar.value, rotacao);
+                Tiro(powerBar.value, rotacao.z);
                 barrasIniciadas = false;
                 ResetBarras();
             }        
@@ -95,21 +95,16 @@ public class Player : MonoBehaviour {
     void ResetBarras(){
         powerBar.value = 0;
         var rotacao = directionBar.transform.rotation.eulerAngles;
-        rotacao.z = 0f;
+        if (gameObject.name == player1.name) rotacao.z = 180f;
+        else rotacao.z = 0;
         directionBar.transform.rotation = Quaternion.Euler(rotacao);
         resetAux = true;
     }
 
-    void Tiro(float powerBarValue, Vector3 rotacao){
-        GameObject projetilAClone = Instantiate(projetilAPrefab, saidaProjetil.transform.position,Quaternion.Euler(rotacao)) as GameObject;
+    void Tiro(float powerBarValue, float rotacao){
+        GameObject projetilAClone = Instantiate(projetilAPrefab, saidaProjetil.transform.position, Quaternion.Euler(0,0,rotacao)) as GameObject;
         Rigidbody2D rbProjA = projetilAClone.GetComponent<Rigidbody2D>();
-        rbProjA.transform.rotation = Quaternion.Euler(rotacao);
-        rbProjA.velocity = new Vector2(powerBarValue * (90f / rotacao.z) * 2, (rotacao.z / 90f) * powerBarValue * 10) * 2;
-        print(rotacao.z);
-
-        //Estudar como arremessar no ângulo certo
-        //rbProjA.AddForce(transform.right * powerBarValue * 1000); //a força está OK, porém não está obedecendo o ângulo. Estudar
-
+        rbProjA.velocity = new Vector2((90 - rotacao)/90, (90 - Mathf.Abs(rotacao-90) ) / 90) * powerBarValue * 20;
         TrocaPlayers();
     }
 
