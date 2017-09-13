@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - ProjetilA
+  - ProjetilB
+  - ProjetilC
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -15,7 +18,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - Projetil
   - 
   - 
   - 

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: adccce10c6b9da74b8c589180d12b07d
+timeCreated: 1505294907
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - pjA: {fileID: 1027226230942942, guid: c99ef69423c48cf4c8887099fb9db8f6, type: 2}
+  - pjB: {fileID: 1027226230942942, guid: 281b5903f1454e74ca399dc1dd097433, type: 2}
+  - pjC: {fileID: 1027226230942942, guid: 634c82dede6bc434bb61aac7a5a8186f, type: 2}
+  - pjCm: {fileID: 1027226230942942, guid: b37c23794c5fe0f4f8300b9e4f2bf496, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
