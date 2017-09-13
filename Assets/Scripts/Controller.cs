@@ -7,36 +7,38 @@ public class Controller : MonoBehaviour {
     public GameObject go;
     private Vector3 vec;
     public int controleObjeto;
-    private float posicao = 0.2f;
+    private float posicao = 0f;
+    public float distanciaLR = 4f;
+    public float distanciaUD = 4f;
 
     private void Start() {
         PlayerPrefs.SetInt("posVert", 1);
         PlayerPrefs.SetInt("posHori", 1);
     }
 
-    private void FixedUpdate() {
+    private void Update() {
         if(controleObjeto == 1) { 
             switch (PlayerPrefs.GetInt("posVert")) {
                 case 1:
                     vec = new Vector3(go.transform.position.x + posicao * Time.deltaTime, go.transform.position.y, go.transform.position.z);
                     go.transform.SetPositionAndRotation(vec, Quaternion.identity);
                     //print("indo = " + posicao);
-                    if (posicao <= 0.5f) {
+                    if (posicao <= 0f) {
                         PlayerPrefs.SetInt("posVert", 2);
                     }
                     else {
-                        posicao = posicao - 0.1f;
+                        posicao = posicao - 0.05f;
                     }
                     break;
                 case 2:
                     vec = new Vector3(go.transform.position.x - posicao * Time.deltaTime, go.transform.position.y, go.transform.position.z);
                     go.transform.SetPositionAndRotation(vec, Quaternion.identity);
                     //print("vindo = " + posicao);
-                    if (posicao >= 2f) {
+                    if (posicao >= distanciaLR) {
                         PlayerPrefs.SetInt("posVert", 1);
                     }
                     else {
-                        posicao = posicao + 0.1f;
+                        posicao = posicao + 0.05f;
                     }
                     break;
             }
@@ -47,22 +49,22 @@ public class Controller : MonoBehaviour {
                     vec = new Vector3(go.transform.position.x, go.transform.position.y + posicao * Time.deltaTime, go.transform.position.z);
                     go.transform.SetPositionAndRotation(vec, Quaternion.identity);
                     //print("indo = " + posicao);
-                    if (posicao <= 0.5f) {
+                    if (posicao <= 0f) {
                         PlayerPrefs.SetInt("posHori", 2);
                     }
                     else {
-                        posicao = posicao - 0.1f;
+                        posicao = posicao - 0.05f;
                     }
                     break;
                 case 2:
                     vec = new Vector3(go.transform.position.x, go.transform.position.y - posicao * Time.deltaTime, go.transform.position.z);
                     go.transform.SetPositionAndRotation(vec, Quaternion.identity);
                     //print("vindo = " + posicao);
-                    if (posicao >= 2f) {
+                    if (posicao >= distanciaUD) {
                         PlayerPrefs.SetInt("posHori", 1);
                     }
                     else {
-                        posicao = posicao + 0.1f;
+                        posicao = posicao + 0.05f;
                     }
                     break;
             }
