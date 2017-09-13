@@ -14,6 +14,8 @@ public class Controller : MonoBehaviour {
     private void Start() {
         PlayerPrefs.SetInt("posVert", 1);
         PlayerPrefs.SetInt("posHori", 1);
+        go.GetComponentInChildren<ParticleSystem>().enableEmission = false;
+        go.GetComponentInChildren<ParticleSystem>().Stop();
     }
 
     private void Update() {
@@ -69,5 +71,28 @@ public class Controller : MonoBehaviour {
                     break;
             }
         }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        go.GetComponentInChildren<ParticleSystem>().enableEmission = true;
+        if (go.GetComponentInChildren<ParticleSystem>().isPlaying)
+        {
+
+            go.GetComponentInChildren<ParticleSystem>().Play();
+            go.GetComponentInChildren<ParticleSystem>().Stop();
+
+        }
+        else if (!go.GetComponentInChildren<ParticleSystem>().isPlaying)
+        {
+
+            go.GetComponentInChildren<ParticleSystem>().Play();
+            go.GetComponentInChildren<ParticleSystem>().Stop();
+
+        }
+
+
+
     }
 }
