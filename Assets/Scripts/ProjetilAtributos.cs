@@ -5,6 +5,12 @@ using UnityEngine;
 public class ProjetilAtributos : MonoBehaviour {
 
     public GameObject pjA, pjB, pjC, pjCm;
+    public AudioClip som;
+    AudioSource origemSom;
+
+    private void Awake(){
+        origemSom = GetComponent<AudioSource>();
+    }
 
     int toque = 1;
 	// Use this for initialization
@@ -18,6 +24,7 @@ public class ProjetilAtributos : MonoBehaviour {
 	}
 
     private void OnCollisionEnter2D(Collision2D collision){
+        origemSom.PlayOneShot(som);
         if (gameObject.name == pjA.name){
             if (toque >= 5) Destroy(gameObject);
             else toque++;

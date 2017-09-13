@@ -20,7 +20,7 @@ public class Menu : MonoBehaviour {
 
     public void MenuPersonagem() {
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
 
     }
 
